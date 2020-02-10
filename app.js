@@ -4,6 +4,15 @@ require("dotenv/config");
 
 const app = express();
 
+// Import routes
+const postsRoute = require("./routes/posts");
+
+app.use("/posts", postsRoute);
+
+app.get("/", (req, res) => {
+  res.send("We are on Home");
+});
+
 // Connect to DB
 mongoose.connect(
   process.env.DB_CONNECTION,
