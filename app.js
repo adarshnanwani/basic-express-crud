@@ -4,6 +4,9 @@ require("dotenv/config");
 
 const app = express();
 
+// Middleware
+app.use(express.json());
+
 // Import routes
 const postsRoute = require("./routes/posts");
 
