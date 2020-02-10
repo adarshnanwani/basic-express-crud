@@ -6,20 +6,17 @@ router.get("/", (req, res) => {
   res.send("We are on posts");
 });
 
-router.post("/", (req, res) => {
+router.post("/", async (req, res) => {
   const post = new Post({
     title: req.body.title,
     description: req.body.description
   });
-
-  post
-    .save()
-    .then(data => {
-      res.json(data);
-    })
-    .catch(err => {
-      res.status(200).json({ message: err });
-    });
+  try {
+    const savedPost = await post.save();
+    res.json(savedPost);
+  } catch (err) {
+    res.json(err);
+  }
 });
 
 module.exports = router;
